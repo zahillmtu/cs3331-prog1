@@ -23,7 +23,7 @@ void randomNums(int m) {
     printWrap(buf);
 }
 
-int recursFib(int n) {
+long recursFib(long n) {
 
     if (n == 1 || n == 2) {
         return 1;
@@ -34,7 +34,10 @@ int recursFib(int n) {
 
 void fibonacci(int n) {
     char buf[100];
-    int result;
+    long result;
+
+    sprintf(buf, "      Fibonacci Process Started\n");
+    printWrap(buf);
 
     if (n < 1) {
         sprintf(buf, "Invalid number for fibonacci - %d\n", n);
@@ -43,13 +46,15 @@ void fibonacci(int n) {
     }
 
 
-    result = recursFib(n);
+    result = recursFib((long)n);
 
-    sprintf(buf, "fibonacci has int %d\n", n);
+    sprintf(buf, "      Input Number %d\n", n);
     printWrap(buf);
-    sprintf(buf, "fibonacci result %d\n", result);
+    sprintf(buf, "      Fibonacci Number f(%d) is %ld\n", n, result);
     printWrap(buf);
-
+    sprintf(buf, "      Fibonacci Process Exits\n");
+    printWrap(buf);
+    //exit(0);
 }
 
 void needleSim(int r) {
