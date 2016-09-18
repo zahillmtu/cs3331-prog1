@@ -6,11 +6,14 @@
  * This program fork()s 4 children to run separate calculations.
  */
 
+#include<math.h>
 #include<stdio.h>
 #include<sys/types.h>
 #include<unistd.h>
 #include<stdlib.h>
 #include<string.h>
+
+#define PI 3.14159265358979323846
 
 void printWrap(char buf[100]) {
     write(1, buf, strlen(buf));
@@ -60,7 +63,31 @@ void fibonacci(int n) {
 void needleSim(int r) {
     char buf[100];
 
-    sprintf(buf, "needleSim has int %d\n", r);
+    double dis, angle;
+    double crossCount = 0;
+    double result = 0;
+    double finalRes = 0;
+
+    sprintf(buf, "         Buffon's Needle Process Started\n");
+    printWrap(buf);
+
+    for (int i = 0; i < r; i++) {
+        dis = ((double) rand())/RAND_MAX;                // random number [0, 1)
+        angle = (((double) rand())/RAND_MAX) * 2 * PI; // random number [0, 2pi)
+
+        result = dis + sin(angle);
+        if (result < 0 || result > 1) {
+            crossCount = crossCount + 1;
+        }
+    }
+
+    finalRes = crossCount / r;
+
+    sprintf(buf, "         Input Number %d\n", r);
+    printWrap(buf);
+    sprintf(buf, "         Estimated Probability is %.5f\n", finalRes);
+    printWrap(buf);
+    sprintf(buf, "         Buffon's Needle Process Exits\n");
     printWrap(buf);
 }
 
