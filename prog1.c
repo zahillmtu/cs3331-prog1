@@ -23,11 +23,33 @@ void randomNums(int m) {
     printWrap(buf);
 }
 
+int recursFib(int n) {
+
+    if (n == 1 || n == 2) {
+        return 1;
+    }
+
+    return recursFib(n - 1) + recursFib(n - 2);
+}
+
 void fibonacci(int n) {
     char buf[100];
+    int result;
+
+    if (n < 1) {
+        sprintf(buf, "Invalid number for fibonacci - %d\n", n);
+        printWrap(buf);
+        return;
+    }
+
+
+    result = recursFib(n);
 
     sprintf(buf, "fibonacci has int %d\n", n);
     printWrap(buf);
+    sprintf(buf, "fibonacci result %d\n", result);
+    printWrap(buf);
+
 }
 
 void needleSim(int r) {
