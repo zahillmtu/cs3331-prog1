@@ -1,11 +1,13 @@
-/**
- * Zachary Hill
- * CS 3331
- *
- * This is an introductory program to the fork() and wait() functions
- * This program fork()s 4 children to run separate calculations.
- */
-
+// -----------------------------------------------------------
+// NAME : Zachary Hill                         User ID: zahill
+// DUE DATE : 09/23/2016
+// PROGRAM ASSIGNMENT #1
+// FILE NAME : prog1.c
+// PROGRAM PURPOSE :
+//    This is an introductory program to the wait()
+//    and fork() functions. The program must fork()
+//    four child and run separate calculations in each
+// -----------------------------------------------------------
 #include<math.h>
 #include<stdio.h>
 #include<sys/types.h>
@@ -16,6 +18,15 @@
 
 #define PI 3.14159265358979323846
 
+// -----------------------------------------------------------
+// FUNCTION printWrap :
+//    A wrapper method for printing using write()
+// PARAMETER USAGE :
+//    buf - A character array of size 100 containing
+//          the print statement
+// FUNCTION CALLED :
+//    write()
+// -----------------------------------------------------------
 void printWrap(char buf[100]) {
     write(1, buf, strlen(buf));
 }
