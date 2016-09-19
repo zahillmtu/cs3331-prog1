@@ -9,6 +9,7 @@
 #include<math.h>
 #include<stdio.h>
 #include<sys/types.h>
+#include<sys/wait.h>
 #include<unistd.h>
 #include<stdlib.h>
 #include<string.h>
@@ -100,19 +101,47 @@ void integration(int s) {
 
 int main(int argc, char* argv[]) {
 
+    pid_t pid;
+
     if (argc != 5) {
         printf("Incorrect number of arguments - Expecting 4, "
                 "recieved %d\n", argc - 1);
         exit(1);
     }
 
-    for (int i = 1; i < 5; i++) {
-        printf("%d\n", atoi(argv[i]));
+    for(int i = 0; i < 4; i++) {
+        pid = fork();
+
+        if (pid == -1) {
+            perror("fork");
+            exit(1);
+        } else if (pid == 0) {
+            switch(i) {
+                case 0:
+                    randomNums(atoi(argv[1]));
+                    break;
+
+                case 1:
+                    fibonacci(atoi(argv[2]));
+                    break;
+
+                case 2:
+                    needleSim(atoi(argv[3]));
+                    break;
+
+                case 3:
+                    integration(atoi(argv[4]));
+                    break;
+            }
+            break;
+        }
     }
 
-    randomNums(atoi(argv[1]));
-    fibonacci(atoi(argv[2]));
-    needleSim(atoi(argv[3]));
-    integration(atoi(argv[4]));
+    int status;
+
+    for(int i = 0; i < 4; i++) {
+        wait(&status);
+    }
+
     exit(0);
 }
