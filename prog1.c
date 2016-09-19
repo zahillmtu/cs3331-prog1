@@ -95,7 +95,34 @@ void needleSim(int r) {
 void integration(int s) {
     char buf[100];
 
-    sprintf(buf, "Integration has int %d\n", s);
+    double pointCount = 0; // number of times point(a,b)
+                           // is between sin(x) and x-axis
+    double result;
+    double a;              // x-coordinate
+    double b;              // y-coordinate
+    double finalRes;       // computed area
+
+    for (int i = 0; i < s; i++) {
+        b = ((double) rand())/RAND_MAX;        // random number [0, 1)
+        a = (((double) rand())/RAND_MAX) * PI; // random number [0, pi)
+
+        result = sin(a);
+        if (b <= result) {
+            pointCount = pointCount + 1;
+        }
+    }
+
+    finalRes = (pointCount / s) * PI;
+
+    sprintf(buf, "            Integration Process Started\n");
+    printWrap(buf);
+    sprintf(buf, "            Input Number %d\n", s);
+    printWrap(buf);
+    sprintf(buf, "            Total Hit %.0f\n", pointCount);
+    printWrap(buf);
+    sprintf(buf, "            Estimated Area is %.7f\n", finalRes);
+    printWrap(buf);
+    sprintf(buf, "            Integration Process Exits\n");
     printWrap(buf);
 }
 
