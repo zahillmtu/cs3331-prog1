@@ -33,8 +33,36 @@ void printWrap(char buf[100]) {
 
 void randomNums(int m) {
     char buf[100];
+    char intBuf[25];
+    int numbers[m];
+    int j;
 
-    sprintf(buf, "Random number has int %d\n", m);
+    sprintf(buf, "   Heap Sort Process Started\n");
+    printWrap(buf);
+
+    // Generate the random numbers
+    for (int i = 0; i < m; i++) {
+        numbers[i] = rand() % 100;
+    }
+
+    // Print the random numbers generated
+    j = 0;
+    while (j < m) {
+        // print out the numbers 20 per line
+        sprintf(buf, "   "); // the indentation
+        for (int k = 0; k < 20; k++) {
+            if (j < m) {
+                sprintf(intBuf, "%4d ", numbers[j]);
+                strcat(buf, intBuf);
+                j++;
+            }
+        }
+        strcat(buf, "\n");
+        printWrap(buf);
+    }
+
+
+    sprintf(buf, "   Heap Sort Process Exits\n");
     printWrap(buf);
 }
 
