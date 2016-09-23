@@ -1,2 +1,51 @@
 # cs3331-prog1
 Warm up assignment for fork() and wait()
+
+The following are questions from the problem description
+
+1. 
+    parent
+    child
+    child
+    child
+
+3 addtional processes will be created in addition to the initial process. 
+Intially the loop is set to run 3 times going from 1 to 3 or until i = 4. 
+With each iteration a call to fork is made. fork() returns a positive int 
+if you are the parent process and 0 if you are the child, therefore the
+if statement will execute when the process is the parent causing it to break
+from the loop and print. The child will then increment the counter and 
+continue the loop, creating another child, becoming the parent, breaking the
+loop and printing. This happens 3 times to create a child of the child that
+was just forked. 
+
+2.
+    parent
+child child child child
+
+3 processes will be created in addition to the initial process. The loop is
+set to run 4 times going from 0 to 3 or until i = 4. When fork() is called,
+the if statement executes for the child processes because they receive 0 from
+fork() and breaks the loop. The parent receives a number >0 so it continues
+to fork() a new process until i = 4. This creates one parent with 4 children.
+
+3.
+    proc
+proc        proc    proc
+proc proc   proc
+proc
+
+7 processes will be created in addition to the initial process. The if 
+statement will only execute the break if fork() fails. Assuming that
+doesn't happen, 7 additional processes will be created. The intial
+process will create 3 children, one for each interation of the loop
+from 0 to 2 or less than 3. The first child will start with i = 1
+so it will create two processes, one where i = 2 and another i = 3.
+The child with i = 2 creates another process to complete all iterations.
+The second process created by the intial process starts with i = 2, so it 
+creates 1 additional process. Finally, the third process created by the 
+intial process has i = 3 and creates no additional processes. 
+
+In short, each child has a incremented index of i depending on when its
+parent creates it, and in turn creates 3 - i processes which each have
+an incremented index of i.
