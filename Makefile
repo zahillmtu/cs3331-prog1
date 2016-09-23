@@ -1,5 +1,5 @@
 CC = gcc
-CCFLAGS = -std=c99 -g -Wall -Wextra -lreadline -lm
+CCFLAGS = -g -Wall -Wextra -lreadline -lm
 EXEC = prog1
 OBJS = prog1.o
 

@@ -62,9 +62,10 @@ void downheap(int numbers[], int numbersSize, int index) {
 
 
 void heapify(int numbers[], int numbersSize) {
+    int i;
 
     // Build the heap property
-    for (int i = numbersSize / 2; i >= 0; i--) {
+    for (i = numbersSize / 2; i >= 0; i--) {
         downheap(numbers, numbersSize, i);
     }
 }
@@ -73,11 +74,12 @@ void heapify(int numbers[], int numbersSize) {
 void heapSort(int numbers[], int numbersSize) {
     int temp;
     int heapSize = numbersSize;
+    int i;
 
     // create the heap
     heapify(numbers, numbersSize);
     // repeatedly swap the largest to the front of the array
-    for (int i = numbersSize - 1; i > 0; i--) {
+    for (i = numbersSize - 1; i > 0; i--) {
         temp = numbers[0];
         numbers[0] = numbers[i];
         numbers[i] = temp;
@@ -88,7 +90,7 @@ void heapSort(int numbers[], int numbersSize) {
 
     // I made it sort backwards so to fix, reverse the array
     int swapVar = numbersSize - 1;
-    for (int i = 0; i < numbersSize / 2; i++) {
+    for (i = 0; i < numbersSize / 2; i++) {
        temp = numbers[i];
        numbers[i] = numbers[swapVar];
        numbers[swapVar] = temp;
@@ -100,7 +102,7 @@ void randomNums(int m) {
     char buf[100];
     char intBuf[25];
     int numbers[m];
-    int j;
+    int j, k, i;
 
     memset(numbers, 0, m);
 
@@ -119,7 +121,7 @@ void randomNums(int m) {
 
     // Generate the random numbers
     srand(time(NULL));
-    for (int i = 0; i < m; i++) {
+    for (i = 0; i < m; i++) {
         numbers[i] = rand() % 100;
     }
 
@@ -130,7 +132,7 @@ void randomNums(int m) {
     while (j < m) {
         // print out the numbers 20 per line
         sprintf(buf, "   "); // the indentation
-        for (int k = 0; k < 20; k++) {
+        for (k = 0; k < 20; k++) {
             if (j < m) {
                 sprintf(intBuf, "%4d ", numbers[j]);
                 strcat(buf, intBuf);
@@ -151,7 +153,7 @@ void randomNums(int m) {
     while (j < m) {
         // print out the numbers 20 per line
         sprintf(buf, "   "); // the indentation
-        for (int k = 0; k < 20; k++) {
+        for (k = 0; k < 20; k++) {
             if (j < m) {
                 sprintf(intBuf, "%4d ", numbers[j]);
                 strcat(buf, intBuf);
@@ -198,7 +200,6 @@ void fibonacci(int n) {
     printWrap(buf);
     sprintf(buf, "      Fibonacci Process Exits\n");
     printWrap(buf);
-    //exit(0);
 }
 
 void needleSim(int r) {
@@ -208,12 +209,13 @@ void needleSim(int r) {
     double crossCount = 0;
     double result = 0;
     double finalRes = 0;
+    int i;
 
     sprintf(buf, "         Buffon's Needle Process Started\n");
     printWrap(buf);
 
     srand(time(NULL));
-    for (int i = 0; i < r; i++) {
+    for (i = 0; i < r; i++) {
         dis = ((double) rand())/RAND_MAX;                // random number [0, 1)
         angle = (((double) rand())/RAND_MAX) * 2 * PI; // random number [0, 2pi)
 
@@ -242,9 +244,10 @@ void integration(int s) {
     double a;              // x-coordinate
     double b;              // y-coordinate
     double finalRes;       // computed area
+    int i;
 
     srand(time(NULL));
-    for (int i = 0; i < s; i++) {
+    for (i = 0; i < s; i++) {
         b = ((double) rand())/RAND_MAX;        // random number [0, 1)
         a = (((double) rand())/RAND_MAX) * PI; // random number [0, pi)
 
@@ -291,7 +294,8 @@ int main(int argc, char* argv[]) {
     printWrap(buf);
 
 
-    for(int i = 0; i < 4; i++) {
+    int i;
+    for(i = 0; i < 4; i++) {
         pid = fork();
 
 
@@ -351,7 +355,7 @@ int main(int argc, char* argv[]) {
 
     sprintf(buf, "Main Process Waits\n");
     printWrap(buf);
-    for(int i = 0; i < 4; i++) {
+    for(i = 0; i < 4; i++) {
         wait(&status);
     }
     sprintf(buf, "Main Process Exits\n");
